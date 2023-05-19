@@ -51,9 +51,9 @@ public abstract class AbstractBackwardsCompatTest {
 
 	protected void verify(String testname, boolean failOnRemovedFields, String protoFile) throws IOException {
 		ProtolockBackwardsCompatibilityChecker checker = new ProtolockBackwardsCompatibilityChecker();
-		checker.init(new File(String.join(File.pathSeparator, new[] { testdataBaseDirectory, testname, source, lockFile })));
+		checker.init(new File(String.join(File.separator, testdataBaseDirectory, testname, sourceFolder, lockFile)));
 
-		Schema sourceSchema = loadSchema(new File(String.join(File.pathSeparator, new[] { testdataBaseDirectory, testname, sourceFolder })));
+		Schema sourceSchema = loadSchema(new File(String.join(File.separator, testdataBaseDirectory, testname, sourceFolder)));
 		link(sourceSchema, false, testname);
 		ProtoFile sourceProtofile = sourceSchema.protoFile(protoFile);
 
@@ -63,7 +63,7 @@ public abstract class AbstractBackwardsCompatTest {
 		boolean linkedOk = link(sourceSchema, true, testname);
 		assertTrue(linkedOk);
 
-		Schema expectedSchema = loadSchema(new File(String.join(File.pathSeparator, new[] { testdataBaseDirectory, testname, expectedFolder })));
+		Schema expectedSchema = loadSchema(new File(String.join(File.separator, testdataBaseDirectory, testname, expectedFolder)));
 		link(expectedSchema, false, testname);
 		ProtoFile expectedProtofile = expectedSchema.protoFile(protoFile);
 
@@ -99,7 +99,7 @@ public abstract class AbstractBackwardsCompatTest {
 				System.out.println("Dumpfolder: " + dumpFolder.getAbsolutePath());
 				for (ProtoFile protoFile : schema.protoFiles()) {
 					File destFolder = createPackageFolderStructure(new File(dumpFolder, testname), protoFile.packageName());
-					File outputFile = new File(destFolder, protoFile.name().lowercase(Locale.ROOT));
+					File outputFile = new File(destFolder, protoFile.name().toLowerCase(Locale.ROOT));
 					try (Writer writer = new FileWriter(outputFile)) {
 						writer.write(protoFile.toSchema());
 					}

@@ -52,7 +52,7 @@ public class NamespaceHelper {
 
 		String packageName;
 		if (forceProtoPackage != null) {
-			packageName = forceProtoPackage.lowercase();
+			packageName = forceProtoPackage.toLowerCase();
 		} else if (StringUtils.trimToNull(namespace) == null) {
 			packageName = null;
 		} else {
@@ -71,7 +71,7 @@ public class NamespaceHelper {
 					LOGGER.warn("Unable to create decent package name from XML namespace {}, falling back to {} ", namespace, packageName, urnSyntaxError);
 				}
 			}
-			packageName = StringUtils.trimToNull(packageName).lowercase();
+			packageName = StringUtils.trimToNull(packageName).toLowerCase();
 
 			NAMESPACE_TO_PACKAGENAME.put(namespace, packageName);
 		}
