@@ -23,50 +23,53 @@ package no.entur.schema2proto.compatibility;
  * #L%
  */
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
 public class ProtolockBackwardsCompatibilityCheckerEnumTest extends AbstractBackwardsCompatTest {
 
+	private static String PROTO_FILE = "default" + File.separator + "default.proto";
+
 	@Test
 	public void testAddedEnumConstant() throws IOException {
-		verify("newenumconstant", true, "default/default.proto");
+		verify("newenumconstant", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testRemovedEnumConstant() throws IOException {
-		verify("removedenumconstant", false, "default/default.proto");
+		verify("removedenumconstant", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testAddEnumConstantExistingReservation() throws IOException {
-		verify("existingreservationenumconstant", false, "default/default.proto");
+		verify("existingreservationenumconstant", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testInjectEnumConstant() throws IOException {
-		verify("injectenumconstant", true, "default/default.proto");
+		verify("injectenumconstant", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testChangedEnumConstantTag() throws IOException {
-		verify("changedenumconstanttag", true, "default/default.proto");
+		verify("changedenumconstanttag", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testChangedEnumConstantName() throws IOException {
-		verify("changedenumconstantname", false, "default/default.proto");
+		verify("changedenumconstantname", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testNewAndRemoveEnumConstant() throws IOException {
-		verify("newandremovedenumconstant", false, "default/default.proto");
+		verify("newandremovedenumconstant", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testNestedMessageWithEnum() throws IOException {
-		verify("nestedmessagewithenum", false, "default/default.proto");
+		verify("nestedmessagewithenum", false, PROTO_FILE);
 	}
 
 }
