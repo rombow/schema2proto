@@ -23,60 +23,64 @@ package no.entur.schema2proto.compatibility;
  * #L%
  */
 
+import java.io.File;
 import java.io.IOException;
 
 import org.junit.jupiter.api.Test;
 
 public class ProtolockBackwardsCompatibilityCheckerFieldTest extends AbstractBackwardsCompatTest {
 
+	private static String PROTO_FILE = "default" + File.separator + "default.proto";
+
 	@Test
 	public void testAddedField() throws IOException {
-		verify("newfield", true, "default/default.proto");
+		verify("newfield", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testRemovedField() throws IOException {
-		verify("removedfield", false, "default/default.proto");
+		verify("removedfield", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testAddFieldExistingReservation() throws IOException {
-		verify("existingreservation", false, "default/default.proto");
+		verify("existingreservation", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testInjectField() throws IOException {
-		verify("injectedfield", true, "default/default.proto");
+		verify("injectedfield", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testChangedFieldTag() throws IOException {
-		verify("changedfieldtag", true, "default/default.proto");
+		verify("changedfieldtag", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testChangedFieldName() throws IOException {
-		verify("changedfieldname", false, "default/default.proto");
+		verify("changedfieldname", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testNewAndRemovedField() throws IOException {
-		verify("newandremovedfield", false, "default/default.proto");
+		verify("newandremovedfield", false, PROTO_FILE);
 	}
 
 	@Test
 	public void testNestedMessageWithOneOf() throws IOException {
-		verify("nestedmessagewithoneof", true, "default/default.proto");
+		verify("nestedmessagewithoneof", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testNestedMessageWithOneOfReorganizedFields() throws IOException {
-		verify("nestedmessagewithoneof_reorganizedfields", true, "default/default.proto");
+		verify("nestedmessagewithoneof_reorganizedfields", true, PROTO_FILE);
 	}
 
 	@Test
 	public void testBugIgnoredReservation() throws IOException {
-		verify("bug_ignoredreservation", false, "uk/org/netex/www/netex/uk_org_netex_www_netex.proto");
+		verify("bug_ignoredreservation", false, "uk" + File.separator + "org" + File.separator + "netex" + File.separator + "www" + File.separator + "netex"
+				+ File.separator + "uk_org_netex_www_netex.proto");
 	}
 
 }
